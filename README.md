@@ -1,1 +1,0 @@
-# yelkoru.com

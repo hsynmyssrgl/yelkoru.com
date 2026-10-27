@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yelkoru.com/sitemap.xml
