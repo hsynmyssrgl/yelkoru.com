@@ -564,8 +564,50 @@ a, button, summary { transition: color .15s, background-color .15s, box-shadow .
 }
 
 /* ---------- Yazdırma ---------- */
+/* ---------- Ekran ekran (ürün sayfaları; talimat 82, Tasarım §2.7) ----------
+   Geniş ekranda görsel ve açıklama kartı yan yana, satır satır yer değiştirir; 860 px altında görsel üstte, kart altta.
+   Görseller kabul edilmiş ekran taslaklarından; cihaz çerçevesi CSS ile çizilir. */
+.s-ekranlar { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 72px; }
+.s-ekran-satir { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.s-ekran-satir.s-genis { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.s-ekran-satir:nth-child(even) > .s-ekran-gorsel { order: 2; }
+.s-ekran-satir.s-genis:nth-child(even) { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.s-ekran-gorsel { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.s-ekran-gorsel figcaption { font-size: 0.8125rem; line-height: 1.125rem; color: var(--metin-ikincil); }
+.s-cerceve { box-sizing: border-box; width: 100%; background: #0B0B0C; box-shadow: 0 0 0 1px var(--ayirici), 0 18px 40px -24px rgba(0, 0, 0, 0.45); }
+.s-cerceve img { display: block; width: 100%; height: auto; }
+.s-cerceve-iphone { max-width: 280px; padding: 9px; border-radius: 46px; }
+.s-cerceve-iphone img { border-radius: 38px; }
+.s-cerceve-ipad { max-width: 620px; padding: 2.2%; border-radius: 4.4% / 5.8%; }
+.s-cerceve-ipad img { border-radius: 2.2% / 2.9%; }
+.s-cerceve-mac { max-width: 620px; padding: 2% 2% 2.6%; border-radius: 2.4% / 3.8%; }
+.s-cerceve-mac img { border-radius: 0.6% / 1%; }
+.s-cerceve-watch { max-width: 190px; padding: 12px; border-radius: 30% / 25%; }
+.s-cerceve-watch img { border-radius: 24% / 20%; }
+.s-ekran-kart { min-width: 0; display: flex; flex-direction: column; gap: 10px; padding: 28px; border-radius: 24px; background: var(--zemin); }
+.s-ekran-ust { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.s-ekran-yol { font-size: 0.875rem; line-height: 1.25rem; font-weight: 600; color: var(--vurgu); overflow-wrap: anywhere; }
+.s-cihaz-rozet { font-size: 0.75rem; line-height: 1rem; font-weight: 600; padding: 3px 10px; border-radius: 9999px; color: var(--metin-ikincil); box-shadow: inset 0 0 0 1px var(--ayirici); }
+.s-ekran-kart .s-b3 { overflow-wrap: break-word; }
+.s-ekran-maddeler { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.s-ekran-maddeler li { position: relative; padding-left: 20px; font-size: 0.9375rem; line-height: 1.375rem; }
+.s-ekran-maddeler li::before { content: ""; position: absolute; left: 4px; top: 0.55rem; width: 7px; height: 7px; border-radius: 50%; background: var(--vurgu); }
+@media (max-width: 860px) {
+  .s-ekranlar { gap: 48px; }
+  .s-ekran-satir, .s-ekran-satir.s-genis, .s-ekran-satir.s-genis:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .s-ekran-satir:nth-child(even) > .s-ekran-gorsel { order: 0; }
+}
+@media (max-width: 720px) {
+  .s-ekran-kart { padding: 20px; border-radius: 18px; }
+  .s-cerceve-iphone { max-width: 240px; padding: 8px; border-radius: 40px; }
+  .s-cerceve-iphone img { border-radius: 33px; }
+}
+@media (prefers-contrast: more) { .s-cerceve { box-shadow: 0 0 0 2px var(--metin); } }
+
+
 @media print {
   .s-ust, .s-alt, .s-sayfa-gez, .s-atla, .s-yardim-konular { display: none !important; }
   .s-motif::before { display: none; }
   .s-sss details > div { display: block; }
+  .s-ekran-satir { break-inside: avoid; }
 }
